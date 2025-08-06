@@ -119,6 +119,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- Additional keybinds
+vim.keymap.set('n', '<leader>w', '<cmd>write<CR>', { desc = '[W]rite to the current file' })
+vim.keymap.set('n', '<leader>lsp', '<cmd>LspRestart<CR>', { desc = 'Restart LSP' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center window on cursor on jump' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center window on cursor on jump' })
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[P]aste without register override' })
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = '[Y]ank to system clipboard' })
+vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = '[Y]ank line to system clipboard' })
+-- NOTE: Remember, <C-V> pastes from system clipboard
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
