@@ -689,7 +689,7 @@ require('lazy').setup({
       },
     },
   },
-  -- TODO: Keep reading from here
+
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
