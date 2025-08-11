@@ -9,8 +9,14 @@ vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
+-- For more options, you can see `:help option-list`
+
+-- Set indentation behavior according to :help usr_30 section 5
+-- NMAC427/guess-indent.nvim plugin add automatic detection
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.smarttab = true
 
 -- Make line numbers default
 vim.o.number = true
