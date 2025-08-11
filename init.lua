@@ -73,7 +73,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 5
+vim.o.scrolloff = 8
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -121,6 +121,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Additional keybinds
 vim.keymap.set('n', '<leader>w', '<cmd>write<CR>', { desc = '[W]rite to the current file' })
+vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = '[P]roject [V]iew' })
 vim.keymap.set('n', '<leader>lsp', '<cmd>LspRestart<CR>', { desc = 'Restart LSP' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Center window on cursor on jump' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Center window on cursor on jump' })
