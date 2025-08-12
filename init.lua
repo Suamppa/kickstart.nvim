@@ -338,11 +338,9 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = { '%__virtual.cs$', 'node_modules/' },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -636,6 +634,7 @@ require('lazy').setup({
             },
           },
         },
+        html = {},
         roslyn = {},
         rzls = {},
       }
@@ -977,9 +976,42 @@ require('lazy').setup({
 
   {
     'seblyng/roslyn.nvim',
+    dependencies = {
+      {
+        'tris203/rzls.nvim',
+        config = true,
+      },
+    },
     ---@module 'roslyn.config'
     ---@type RoslynNvimConfig
     opts = {},
+    config = function()
+      local rzls_path = vim.fn.expand '$MASON/packages/rzls/libexec'
+      local cmd = {
+        'roslyn',
+        '--stdio',
+        '--logLevel=Information',
+        '--extensionLogDirectory=' .. vim.fs.dirname(vim.lsp.get_log_path()),
+        '--razorSourceGenerator=' .. vim.fs.joinpath(rzls_path, 'Microsoft.CodeAnalysis.Razor.Compiler.dll'),
+        '--razorDesignTimePath=' .. vim.fs.joinpath(rzls_path, 'Targets', 'Microsoft.NET.Sdk.Razor.DesignTime.targets'),
+        '--extension',
+        vim.fs.joinpath(rzls_path, 'RazorExtension', 'Microsoft.VisualStudioCode.RazorExtension.dll'),
+      }
+
+      vim.lsp.config('roslyn', {
+        cmd = cmd,
+        handlers = require 'rzls.roslyn_handlers',
+      })
+      vim.lsp.enable 'roslyn'
+    end,
+    init = function()
+      vim.filetype.add {
+        extension = {
+          razor = 'razor',
+          cshtml = 'razor',
+        },
+      }
+    end,
   },
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
