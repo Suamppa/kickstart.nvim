@@ -683,35 +683,41 @@ require('lazy').setup({
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
+          require('conform').format { async = true }
         end,
         mode = '',
         desc = '[F]ormat buffer',
       },
     },
+    ---@module 'conform'
+    ---@type conform.setupOpts
     opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nil
-        else
-          return {
-            timeout_ms = 500,
-            lsp_format = 'fallback',
-          }
-        end
-      end,
+      notify_on_error = true,
+      -- format_on_save = function(bufnr)
+      --   -- Disable "format_on_save lsp_fallback" for languages that don't
+      --   -- have a well standardized coding style. You can add additional
+      --   -- languages here or re-enable it for the disabled ones.
+      --   local disable_filetypes = { c = true, cpp = true }
+      --   if disable_filetypes[vim.bo[bufnr].filetype] then
+      --     return nil
+      --   else
+      --     return {
+      --       timeout_ms = 500,
+      --       lsp_format = 'fallback',
+      --     }
+      --   end
+      -- end,
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      },
+      default_format_opts = {
+        lsp_format = 'fallback',
       },
     },
   },
@@ -1044,6 +1050,18 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
+})
+
+-- Adapt to local EditorConfig
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    local editorconfig = vim.b.editorconfig
+    if editorconfig and editorconfig.max_line_length then
+      vim.opt_local.colorcolumn = editorconfig.max_line_length
+    else
+      vim.opt_local.colorcolumn = '120'
+    end
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
