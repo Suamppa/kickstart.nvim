@@ -424,14 +424,14 @@ require('lazy').setup({
       vim.keymap.set('n', '<C-e>', function() toggle_telescope(harpoon:list()) end, { desc = 'Open harpoon window' })
       vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = '[A]dd file to harpoon' })
 
-      vim.keymap.set("n", "<C-a>", function() harpoon:list():select(1) end, { desc = 'Go to harpoon file 1' })
-      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(2) end, { desc = 'Go to harpoon file 2' })
-      vim.keymap.set("n", "<C-d>", function() harpoon:list():select(3) end, { desc = 'Go to harpoon file 3' })
-      vim.keymap.set("n", "<C-f>", function() harpoon:list():select(4) end, { desc = 'Go to harpoon file 4' })
+      -- vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end, { desc = 'Go to harpoon file 1' })
+      -- vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end, { desc = 'Go to harpoon file 2' })
+      -- vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end, { desc = 'Go to harpoon file 3' })
+      -- vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end, { desc = 'Go to harpoon file 4' })
 
       -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set("n", "<C-J>", function() harpoon:list():prev() end, { desc = 'Go to previous harpoon file (down)' })
-      vim.keymap.set("n", "<C-K>", function() harpoon:list():next() end, { desc = 'Go to next harpoon file (up)' })
+      vim.keymap.set("n", "<C-S-J>", function() harpoon:list():prev() end, { desc = 'Go to previous harpoon file (down)' })
+      vim.keymap.set("n", "<C-S-K>", function() harpoon:list():next() end, { desc = 'Go to next harpoon file (up)' })
     end,
   },
 
