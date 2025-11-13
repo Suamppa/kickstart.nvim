@@ -7,6 +7,15 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Set default terminal emulator to pwsh on Windows
+if vim.fn.has('win32') == 1 then
+  vim.g.terminal_emulator = 'pwsh'
+  vim.o.shell = 'pwsh'
+  vim.o.shellcmdflag = '-Command'
+  vim.o.shellquote = '\"'
+  vim.o.shellxquote = ''
+end
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- For more options, you can see `:help option-list`
