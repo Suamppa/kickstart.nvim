@@ -1101,6 +1101,17 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup({
+        '*',
+      }, {
+        css = true,
+      })
+    end,
+  }
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
